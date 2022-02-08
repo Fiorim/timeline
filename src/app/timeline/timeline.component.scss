@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px;
+}
+section {
+  width: 100%;
+  .item {
+    height: 200px;
+    padding: 0px 15px;
+    background-color: lightblue;
+    margin: 1px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-family: lato, sans-serif;
+  }
+}
+aside {
+  li {
+    height: 200px;
+    padding: 0px 15px;
+    background-color: #a3a3a3;;
+    color: white;
+    margin: 1px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-family: lato, sans-serif;
+  }
+}
