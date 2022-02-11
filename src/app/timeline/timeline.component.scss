@@ -1,7 +1,11 @@
 :host {
+  margin: 50px;
+  display: block;
+}
+
+.body {
   display: flex;
   justify-content: space-between;
-  margin: 50px;
 }
 section {
   width: 100%;

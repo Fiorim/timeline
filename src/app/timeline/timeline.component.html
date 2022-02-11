@@ -1,26 +1,14 @@
-<section>
-  <ul>
-    <li class="item">
-      firt event
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </li>
-    <li class="item">
-      second event
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </li>
-    <li class="item">
-      third event
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </li>
-    <li class="item">
-      4th event
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </li>
-    <li class="item">
-      5th event
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </li>
-  </ul>
-</section>
-<app-wheel></app-wheel>
+<header>
+  mode: {{mode}}
+</header>
+<div class="body">
+  <section>
+    <ul>
+      <li class="item" *ngFor="let event of events">
+        {{event}}
+      </li>
+    </ul>
+  </section>
+  <app-wheel></app-wheel>
+</div>
 
