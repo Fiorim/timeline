@@ -1,11 +1,14 @@
 <header>
-  mode: {{mode}}
+  mode: {{Mode[mode]}} <br><br>
+  selected event id: {{selectedEvent?.id}} <br>
+  selected event date: {{selectedEvent?.date | date}} <br>
+  selected event type: {{selectedEvent?.type}} <br>
 </header>
 <div class="body">
   <section>
     <ul>
-      <li class="item" *ngFor="let event of events">
-        {{event}}
+      <li class="item" *ngFor="let event of events" (click)="selectEvent(event)">
+        {{event.highlights}}
       </li>
     </ul>
   </section>
