@@ -27,36 +27,36 @@ export class TimelineComponent implements OnInit {
           highlights: `First month highlights.`,
           type: Mode.Month,
           children: [
-            // {
-            //   id: 100,
-            //   date: new Date('2018-1-1'),
-            //   highlights: `First day event.`,
-            //   type: Mode.Day
-            // },
-            // {
-            //   id: 101,
-            //   date: new Date('2018-1-2'),
-            //   highlights: `First day event.`,
-            //   type: Mode.Day
-            // },
-            // {
-            //   id: 102,
-            //   date: new Date('2018-1-3'),
-            //   highlights: `First day event.`,
-            //   type: Mode.Day
-            // },
-            // {
-            //   id: 103,
-            //   date: new Date('2018-1-4'),
-            //   highlights: `First day event.`,
-            //   type: Mode.Day
-            // },
-            // {
-            //   id: 104,
-            //   date: new Date('2018-1-5'),
-            //   highlights: `First day event.`,
-            //   type: Mode.Day
-            // },
+            {
+              id: 100,
+              date: new Date('2018-1-1'),
+              highlights: `First day event.`,
+              type: Mode.Day
+            },
+            {
+              id: 101,
+              date: new Date('2018-1-2'),
+              highlights: `First day event.`,
+              type: Mode.Day
+            },
+            {
+              id: 102,
+              date: new Date('2018-1-3'),
+              highlights: `First day event.`,
+              type: Mode.Day
+            },
+            {
+              id: 103,
+              date: new Date('2018-1-4'),
+              highlights: `First day event.`,
+              type: Mode.Day
+            },
+            {
+              id: 104,
+              date: new Date('2018-1-5'),
+              highlights: `First day event.`,
+              type: Mode.Day
+            },
           ]
         },
         {
@@ -124,11 +124,12 @@ export class TimelineComponent implements OnInit {
     });
   }
 
-  selectEvent(event:  Event) {
-    debugger;
-    this.mode = event.type +1;
-    this.selectedEvent = event;
-    this.updateEventList();
+  selectEvent(event: Event) {
+    if (event.type !== Mode.Day) {
+      this.mode = event.type +1;
+      this.selectedEvent = event;
+      this.updateEventList();
+    }
   }
 
   updateEventList() {
@@ -136,6 +137,12 @@ export class TimelineComponent implements OnInit {
       this.events = this.selectedEvent.children || [];
     } else {
       this.events = this.mockEvents;
+      this.mode = Mode.Year;
     }
+  }
+
+  back() {
+      this.selectedEvent = null;
+      this.updateEventList();
   }
 }

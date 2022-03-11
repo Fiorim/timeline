@@ -1,9 +1,15 @@
 <aside>
   <ul>
-    <li>2018</li>
-    <li>2019</li>
-    <li>2020</li>
-    <li>2021</li>
-    <li>2022</li>
+    <li *ngFor="let event of eventList">
+      <ng-container *ngIf="event.type === Mode.Year">
+        {{ event.date | date:'yyyy'}}
+      </ng-container>
+      <ng-container *ngIf="event.type === Mode.Month">
+        {{ event.date | date:'MMM'}}
+      </ng-container>
+      <ng-container *ngIf="event.type === Mode.Day">
+        {{ event.date | date:'dd'}}
+      </ng-container>
+    </li>
   </ul>
 </aside>

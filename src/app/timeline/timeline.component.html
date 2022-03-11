@@ -1,8 +1,13 @@
+<button (click)="back()">back</button>
 <header>
-  mode: {{Mode[mode]}} <br><br>
+  list mode: {{Mode[mode]}} <br><br>
   selected event id: {{selectedEvent?.id}} <br>
-  selected event date: {{selectedEvent?.date | date}} <br>
-  selected event type: {{selectedEvent?.type}} <br>
+  <ng-container *ngIf="selectedEvent?.type === Mode.Year">
+    selected event date: {{selectedEvent?.date | date:'yyyy' }} <br>
+  </ng-container>
+  <ng-container *ngIf="selectedEvent?.type === Mode.Month">
+    selected event date: {{selectedEvent?.date | date:'MMM' }} <br>
+  </ng-container>
 </header>
 <div class="body">
   <section>
@@ -12,6 +17,6 @@
       </li>
     </ul>
   </section>
-  <app-wheel></app-wheel>
+  <app-wheel [eventList]="events"></app-wheel>
 </div>
 
