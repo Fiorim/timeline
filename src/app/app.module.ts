@@ -7,16 +7,9 @@ import { TimelineComponent } from './timeline/timeline.component';
 import { WheelComponent } from './wheel/wheel.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TimelineComponent,
-    WheelComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, TimelineComponent, WheelComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

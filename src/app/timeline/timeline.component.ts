@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
+
 import { Event } from '../shared/event.model';
 import { Mode } from '../shared/mode.enum';
 
@@ -12,7 +13,6 @@ import { Mode } from '../shared/mode.enum';
 export class TimelineComponent implements OnInit {
   mode: Mode = Mode.Year;
   Mode = Mode;
-
 
   mockEvents: Event[] = [
     {
@@ -31,33 +31,33 @@ export class TimelineComponent implements OnInit {
               id: 100,
               date: new Date('2018-1-1'),
               highlights: `First day event.`,
-              type: Mode.Day
+              type: Mode.Day,
             },
             {
               id: 101,
               date: new Date('2018-1-2'),
               highlights: `First day event.`,
-              type: Mode.Day
+              type: Mode.Day,
             },
             {
               id: 102,
               date: new Date('2018-1-3'),
               highlights: `First day event.`,
-              type: Mode.Day
+              type: Mode.Day,
             },
             {
               id: 103,
               date: new Date('2018-1-4'),
               highlights: `First day event.`,
-              type: Mode.Day
+              type: Mode.Day,
             },
             {
               id: 104,
               date: new Date('2018-1-5'),
               highlights: `First day event.`,
-              type: Mode.Day
+              type: Mode.Day,
             },
-          ]
+          ],
         },
         {
           id: 11,
@@ -83,31 +83,31 @@ export class TimelineComponent implements OnInit {
           highlights: `First month highlights.`,
           type: Mode.Month,
         },
-      ]
+      ],
     },
     {
       id: 1,
       date: new Date('2019-1-1'),
       highlights: `Second year highlights.`,
-      type: Mode.Year
+      type: Mode.Year,
     },
     {
       id: 2,
       date: new Date('2020-1-1'),
       highlights: `Third year highlights.`,
-      type: Mode.Year
+      type: Mode.Year,
     },
     {
       id: 3,
       date: new Date('2021-1-1'),
       highlights: `4th year highlights.`,
-      type: Mode.Year
+      type: Mode.Year,
     },
     {
       id: 4,
       date: new Date('2022-1-1'),
       highlights: `5th year highlights`,
-      type: Mode.Year
+      type: Mode.Year,
     },
   ];
 
@@ -126,7 +126,7 @@ export class TimelineComponent implements OnInit {
 
   selectEvent(event: Event) {
     if (event.type !== Mode.Day) {
-      this.mode = event.type +1;
+      this.mode = event.type + 1;
       this.selectedEvent = event;
       this.updateEventList();
     }
@@ -142,7 +142,7 @@ export class TimelineComponent implements OnInit {
   }
 
   back() {
-      this.selectedEvent = null;
-      this.updateEventList();
+    this.selectedEvent = null;
+    this.updateEventList();
   }
 }
