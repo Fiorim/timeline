@@ -8,18 +8,26 @@
   <ng-container *ngIf="selectedEvent?.type === Mode.Month">
     selected event date: {{ selectedEvent?.date | date: "MMM" }} <br />
   </ng-container>
+  <button (click)="scroll()">scroll</button>
 </header>
 <div class="body">
   <section>
     <ul>
+      <li class="helper"></li>
       <li
+        #test
         class="item"
-        *ngFor="let event of events"
+        [ngClass]="{ index: i === 2 }"
+        *ngFor="let event of events; let i = index"
         (click)="selectEvent(event)"
       >
         {{ event.highlights }}
       </li>
+      <li class="helper"></li>
     </ul>
   </section>
-  <app-wheel [eventList]="events"></app-wheel>
+  <app-wheel
+    [eventList]="events"
+    (eventSelected)="showEvent($event)"
+  ></app-wheel>
 </div>

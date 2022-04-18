@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Event } from '../shared/event.model';
 import { Mode } from '../shared/mode.enum';
@@ -8,11 +8,12 @@ import { Mode } from '../shared/mode.enum';
   templateUrl: './wheel.component.html',
   styleUrls: ['./wheel.component.scss'],
 })
-export class WheelComponent implements OnInit {
+export class WheelComponent {
   @Input() eventList: Event[] = [];
+  @Output() eventSelected: EventEmitter<number> = new EventEmitter();
   Mode = Mode;
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  selectEvent(eventIndex: number) {
+    this.eventSelected.emit(eventIndex);
+  }
 }
