@@ -1,0 +1,7 @@
+@import "./helpers/variables";
+
+@mixin default-font {
+  font-family: $default-font-familly;
+  font-weight: bold;
+  font-size: $default-font-size;
+}

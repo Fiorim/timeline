@@ -1,3 +1,6 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
 :host {
   margin: 50px;
   display: block;
@@ -19,14 +22,13 @@ section {
   overflow: scroll;
 
   .item {
+    @include default-font;
     height: 50vh;
     padding: 0px 15px;
     background-color: lightblue;
     margin: 1px;
-    font-size: 18px;
     display: flex;
     align-items: center;
-    font-family: lato, sans-serif;
   }
 
   .helper {

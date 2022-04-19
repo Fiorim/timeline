@@ -1,3 +1,6 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+
 aside {
   height: 100%;
   overflow: scroll;
@@ -9,16 +12,15 @@ aside {
     // height: 200px;
     // flex-grow: 1;
     // height: 50%;
+    @include default-font;
 
     padding: 0px 15px;
-    background-color: #a3a3a3;
+    background-color: $gray;
     color: white;
     // margin: 5px, 1px;
     min-height: 30px;
-    font-size: 18px;
     display: flex;
     align-items: center;
-    font-family: lato, sans-serif;
   }
   .helpers {
     height: 50%;
