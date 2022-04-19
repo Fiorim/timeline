@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { Mode } from '../shared/mode.enum';
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.scss'],
 })
-export class TimelineComponent implements OnInit, AfterViewInit {
+export class TimelineComponent implements OnInit {
   @ViewChildren('test') li: QueryList<any> | undefined;
 
   mode: Mode = Mode.Year;
@@ -30,10 +30,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.mode = data['mode'] as Mode;
       this.updateEventList();
     });
-  }
-
-  ngAfterViewInit() {
-    this.li?.forEach((instance) => console.log(instance));
   }
 
   selectEvent(event: Event) {
@@ -56,13 +52,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   back() {
     this.selectedEvent = null;
     this.updateEventList();
-  }
-
-  scroll() {
-    this.li?.toArray()[2].nativeElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-    });
   }
 
   showEvent(eventIndex: number) {
