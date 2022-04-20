@@ -12,8 +12,15 @@ export class WheelComponent {
   @Input() eventList: Event[] = [];
   @Output() eventSelected: EventEmitter<number> = new EventEmitter();
   Mode = Mode;
+  scrollPosition: any;
 
   selectEvent(eventIndex: number) {
     this.eventSelected.emit(eventIndex);
+  }
+
+  onScroll(e: any) {
+    const scrollIndex = Math.floor(e.target.scrollTop / 3.6);
+    // console.log(scrollIndex);
+    this.selectEvent(scrollIndex);
   }
 }

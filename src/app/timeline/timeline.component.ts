@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { Mode } from '../shared/mode.enum';
   styleUrls: ['./timeline.component.scss'],
 })
 export class TimelineComponent implements OnInit {
-  @ViewChildren('test') li: QueryList<any> | undefined;
+  @ViewChild('test') section!: ElementRef;
 
   mode: Mode = Mode.Year;
   Mode = Mode;
@@ -55,9 +55,16 @@ export class TimelineComponent implements OnInit {
   }
 
   showEvent(eventIndex: number) {
-    this.li?.toArray()[eventIndex].nativeElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
+    this.section.nativeElement.scroll({
+      // behavior: 'smooth',
+      top: eventIndex * 44.02,
     });
+  }
+
+  onScroll(e: any) {
+    // const scrollIndex = Math.floor(e.target.scrollTop);
+    // console.log(scrollIndex);
+    // // this.selectEvent(scrollIndex);
+    // this.showEvent(2000); //4402
   }
 }

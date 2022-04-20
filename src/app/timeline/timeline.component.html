@@ -10,11 +10,10 @@
   </ng-container>
 </header>
 <div class="body">
-  <section>
+  <section #test (scroll)="onScroll($event)">
     <ul>
       <li class="helper"></li>
       <li
-        #test
         class="item"
         [ngClass]="{ index: i === 2 }"
         *ngFor="let event of events; let i = index"

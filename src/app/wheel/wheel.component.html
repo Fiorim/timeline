@@ -1,4 +1,4 @@
-<aside>
+<aside (scroll)="onScroll($event)">
   <ul>
     <li class="helpers"></li>
     <li *ngFor="let event of eventList; let i = index" (click)="selectEvent(i)">
@@ -12,13 +12,6 @@
         {{ event.date | date: "dd" }}
       </ng-container>
     </li>
-    <li>6</li>
-    <li>7</li>
-    <li>8</li>
-    <li>9</li>
-    <li>10</li>
-    <li>11</li>
-    <li>12</li>
     <li class="helpers"></li>
   </ul>
 </aside>
