@@ -2,7 +2,6 @@
 @import "helpers/mixins";
 
 :host {
-  margin: 50px;
   display: block;
 }
 
@@ -21,7 +20,7 @@ section {
     @include default-font;
     height: 50vh;
     padding: 0px 15px;
-    background-color: lightblue;
+    background-color: $primary-bg-color;
     margin: 1px;
     display: flex;
     align-items: center;
