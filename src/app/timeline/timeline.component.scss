@@ -5,11 +5,34 @@
   display: block;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 5vh;
+  @include default-font;
+  background-color: $secondary-bg-color;
+  line-height: normal;
+  .primary-button,
+  button {
+    background-image: linear-gradient(to bottom, #222831, black);
+    border-radius: 8px;
+    color: $primary-color;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    &:hover {
+      margin-top: -2px;
+    }
+  }
+}
+
 .body {
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  height: 80vh;
+  height: 95vh;
 }
 section {
   width: 100%;
@@ -20,7 +43,6 @@ section {
     @include default-font;
     height: 50vh;
     padding: 0px 15px;
-    background-color: $primary-bg-color;
     margin: 1px;
     display: flex;
     align-items: center;

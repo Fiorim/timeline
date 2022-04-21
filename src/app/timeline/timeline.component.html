@@ -1,13 +1,15 @@
-<button (click)="back()">back</button>
 <header>
-  list mode: {{ Mode[mode] }} <br /><br />
-  selected event id: {{ selectedEvent?.id }} <br />
-  <ng-container *ngIf="selectedEvent?.type === Mode.Year">
-    selected event date: {{ selectedEvent?.date | date: "yyyy" }} <br />
-  </ng-container>
-  <ng-container *ngIf="selectedEvent?.type === Mode.Month">
-    selected event date: {{ selectedEvent?.date | date: "MMM" }} <br />
-  </ng-container>
+  <button (click)="back()">back</button>
+  <div>
+    list mode: {{ Mode[mode] }} <br />
+    <ng-container *ngIf="selectedEvent?.type === Mode.Year">
+      selected date: {{ selectedEvent?.date | date: "yyyy" }} <br />
+    </ng-container>
+    <ng-container *ngIf="selectedEvent?.type === Mode.Month">
+      selected date: {{ selectedEvent?.date | date: "MMM" }} <br />
+    </ng-container>
+  </div>
+  <div>selected id: {{ selectedEvent?.id }} <br /></div>
 </header>
 <div class="body">
   <section #eventList (scroll)="onScroll($event)">
