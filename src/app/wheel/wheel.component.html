@@ -1,7 +1,7 @@
 <aside (scroll)="onScroll($event)">
   <ul>
     <li class="helpers"></li>
-    <li *ngFor="let event of eventList; let i = index" (click)="selectEvent(i)">
+    <li *ngFor="let event of eventList">
       <ng-container *ngIf="event.type === Mode.Year">
         {{ event.date | date: "yyyy" }}
       </ng-container>

@@ -10,13 +10,12 @@
   </ng-container>
 </header>
 <div class="body">
-  <section #test (scroll)="onScroll($event)">
+  <section #eventList (scroll)="onScroll($event)">
     <ul>
       <li class="helper"></li>
       <li
         class="item"
-        [ngClass]="{ index: i === 2 }"
-        *ngFor="let event of events; let i = index"
+        *ngFor="let event of events"
         (click)="selectEvent(event)"
       >
         {{ event.highlights }}
@@ -26,6 +25,6 @@
   </section>
   <app-wheel
     [eventList]="events"
-    (eventSelected)="showEvent($event)"
+    (percentageScrolled)="scrollByPercentage($event)"
   ></app-wheel>
 </div>

@@ -12,7 +12,7 @@ import { Mode } from '../shared/mode.enum';
   styleUrls: ['./timeline.component.scss'],
 })
 export class TimelineComponent implements OnInit {
-  @ViewChild('test') section!: ElementRef;
+  @ViewChild('eventList') section!: ElementRef;
 
   mode: Mode = Mode.Year;
   Mode = Mode;
@@ -54,11 +54,20 @@ export class TimelineComponent implements OnInit {
     this.updateEventList();
   }
 
-  showEvent(eventIndex: number) {
-    this.section.nativeElement.scroll({
-      // behavior: 'smooth',
-      top: eventIndex * 44.02,
+  scrollByPercentage(percentage: number) {
+    const eventListElem: HTMLElement = this.section.nativeElement;
+    const scrollLenth = eventListElem.scrollHeight - eventListElem.offsetHeight;
+    eventListElem.scroll({
+      top: (percentage * scrollLenth) / 100,
     });
+
+    // console.log('offsetHeight', this.section);
+
+    // const { scrollHeight, offsetHeight } = e.target;
+    // const elementScrollSize = scrollHeight - offsetHeight;
+    // const scrollIndex = Math.round(
+    //   (e.target.scrollTop / elementScrollSize) * 100
+    // );
   }
 
   onScroll(e: any) {

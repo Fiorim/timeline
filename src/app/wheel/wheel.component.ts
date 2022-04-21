@@ -10,17 +10,21 @@ import { Mode } from '../shared/mode.enum';
 })
 export class WheelComponent {
   @Input() eventList: Event[] = [];
-  @Output() eventSelected: EventEmitter<number> = new EventEmitter();
+  @Output() percentageScrolled: EventEmitter<number> = new EventEmitter();
   Mode = Mode;
   scrollPosition: any;
 
-  selectEvent(eventIndex: number) {
-    this.eventSelected.emit(eventIndex);
-  }
+  onScroll(HTMLEvent: any) {
+    const { scrollHeight, offsetHeight } = HTMLEvent.target;
+    const elementScrollSize = scrollHeight - offsetHeight;
+    const scrollPercent = Math.round(
+      (HTMLEvent.target.scrollTop / elementScrollSize) * 100
+    );
+    // console.log('scrollHeight', scrollHeight);
+    // console.log('offsetHeight', offsetHeight);
+    // console.log('elementScrollSize', elementScrollSize);
+    // console.log('scrollIndex', scrollIndex);
 
-  onScroll(e: any) {
-    const scrollIndex = Math.floor(e.target.scrollTop / 3.6);
-    // console.log(scrollIndex);
-    this.selectEvent(scrollIndex);
+    this.percentageScrolled.emit(scrollPercent);
   }
 }
