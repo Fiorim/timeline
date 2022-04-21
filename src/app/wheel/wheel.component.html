@@ -1,4 +1,4 @@
-<aside (scroll)="onScroll($event)">
+<aside #eventRuler (scroll)="onScroll($event)">
   <ul>
     <li class="helpers"></li>
     <li *ngFor="let event of eventList">

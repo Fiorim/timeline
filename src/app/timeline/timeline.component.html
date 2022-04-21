@@ -25,6 +25,7 @@
   </section>
   <app-wheel
     [eventList]="events"
-    (percentageScrolled)="scrollByPercentage($event)"
+    [outerScrollPercentage]="percentageScrolled"
+    (percentageScrolled)="scroll($event)"
   ></app-wheel>
 </div>

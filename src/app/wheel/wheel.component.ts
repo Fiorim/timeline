@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 
-import { Event } from '../shared/event.model';
+import { ScrollService } from '../scroll.service';
+import { EventBlock } from '../shared/event.model';
 import { Mode } from '../shared/mode.enum';
 
 @Component({
@@ -8,23 +9,35 @@ import { Mode } from '../shared/mode.enum';
   templateUrl: './wheel.component.html',
   styleUrls: ['./wheel.component.scss'],
 })
-export class WheelComponent {
-  @Input() eventList: Event[] = [];
+export class WheelComponent implements OnChanges {
+  @Input() eventList: EventBlock[] = [];
+  @Input() outerScrollPercentage: number = 0;
   @Output() percentageScrolled: EventEmitter<number> = new EventEmitter();
   Mode = Mode;
-  scrollPosition: any;
 
-  onScroll(HTMLEvent: any) {
-    const { scrollHeight, offsetHeight } = HTMLEvent.target;
-    const elementScrollSize = scrollHeight - offsetHeight;
-    const scrollPercent = Math.round(
-      (HTMLEvent.target.scrollTop / elementScrollSize) * 100
+  @ViewChild('eventRuler') eventRuler!: ElementRef;
+
+  constructor(private scrollSvc: ScrollService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['outerScrollPercentage'] &&
+      !changes['outerScrollPercentage'].firstChange
+    ) {
+      this.scroll(this.outerScrollPercentage);
+    }
+  }
+
+  onScroll(event: Event) {
+    this.percentageScrolled.emit(
+      this.scrollSvc.getPercentageScrolled(event.target as HTMLElement)
     );
-    // console.log('scrollHeight', scrollHeight);
-    // console.log('offsetHeight', offsetHeight);
-    // console.log('elementScrollSize', elementScrollSize);
-    // console.log('scrollIndex', scrollIndex);
+  }
 
-    this.percentageScrolled.emit(scrollPercent);
+  scroll(percentage: number) {
+    const { nativeElement } = this.eventRuler;
+    nativeElement.scroll({
+      top: this.scrollSvc.calculateLenthToScroll(percentage, nativeElement),
+    });
   }
 }

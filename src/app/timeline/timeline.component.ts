@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 
 import { MockEvents } from '../../assets/mock-events';
-import { Event } from '../shared/event.model';
+import { ScrollService } from '../scroll.service';
+import { EventBlock } from '../shared/event.model';
 import { Mode } from '../shared/mode.enum';
 
 @Component({
@@ -12,18 +13,23 @@ import { Mode } from '../shared/mode.enum';
   styleUrls: ['./timeline.component.scss'],
 })
 export class TimelineComponent implements OnInit {
-  @ViewChild('eventList') section!: ElementRef;
+  @ViewChild('eventList') eventList!: ElementRef;
 
   mode: Mode = Mode.Year;
   Mode = Mode;
 
-  mockEvents: Event[] = MockEvents.mockEvents;
+  mockEvents: EventBlock[] = MockEvents.mockEvents;
 
-  events: Event[] = [];
+  events: EventBlock[] = [];
 
-  selectedEvent: Event | null = null;
+  selectedEvent: EventBlock | null = null;
 
-  constructor(private route: ActivatedRoute) {}
+  percentageScrolled: number = 0;
+
+  constructor(
+    private route: ActivatedRoute,
+    private scrollSvc: ScrollService
+  ) {}
 
   ngOnInit(): void {
     this.route.data.pipe(take(1)).subscribe((data) => {
@@ -32,7 +38,7 @@ export class TimelineComponent implements OnInit {
     });
   }
 
-  selectEvent(event: Event) {
+  selectEvent(event: EventBlock) {
     if (event.type !== Mode.Day) {
       this.mode = event.type + 1;
       this.selectedEvent = event;
@@ -54,26 +60,16 @@ export class TimelineComponent implements OnInit {
     this.updateEventList();
   }
 
-  scrollByPercentage(percentage: number) {
-    const eventListElem: HTMLElement = this.section.nativeElement;
-    const scrollLenth = eventListElem.scrollHeight - eventListElem.offsetHeight;
-    eventListElem.scroll({
-      top: (percentage * scrollLenth) / 100,
+  scroll(percentage: number) {
+    const { nativeElement } = this.eventList;
+    nativeElement.scroll({
+      top: this.scrollSvc.calculateLenthToScroll(percentage, nativeElement),
     });
-
-    // console.log('offsetHeight', this.section);
-
-    // const { scrollHeight, offsetHeight } = e.target;
-    // const elementScrollSize = scrollHeight - offsetHeight;
-    // const scrollIndex = Math.round(
-    //   (e.target.scrollTop / elementScrollSize) * 100
-    // );
   }
 
-  onScroll(e: any) {
-    // const scrollIndex = Math.floor(e.target.scrollTop);
-    // console.log(scrollIndex);
-    // // this.selectEvent(scrollIndex);
-    // this.showEvent(2000); //4402
+  onScroll(event: Event) {
+    this.percentageScrolled = this.scrollSvc.getPercentageScrolled(
+      event.target as HTMLElement
+    );
   }
 }
