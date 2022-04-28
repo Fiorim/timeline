@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 
-import { MockEvents } from '../../assets/mock-events';
+import { EventsService } from '../events.service';
 import { ScrollService } from '../scroll.service';
 import { EventBlock } from '../shared/event.model';
 import { Mode } from '../shared/mode.enum';
@@ -18,7 +18,7 @@ export class TimelineComponent implements OnInit {
   mode: Mode = Mode.Year;
   Mode = Mode;
 
-  mockEvents: EventBlock[] = MockEvents.mockEvents;
+  mockEvents: EventBlock[] = this.eventSvc.getEvents();
 
   events: EventBlock[] = [];
 
@@ -28,7 +28,8 @@ export class TimelineComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private scrollSvc: ScrollService
+    private scrollSvc: ScrollService,
+    private eventSvc: EventsService
   ) {}
 
   ngOnInit(): void {
