@@ -1,0 +1,9 @@
+<form [formGroup]="eventForm" (ngSubmit)="registerEvent($event)">
+  <input formControlName="date" type="date" />
+  <textarea
+    formControlName="description"
+    rows="4"
+    placeholder="What happened?"
+  ></textarea>
+  <button type="submit">Register</button>
+</form>
